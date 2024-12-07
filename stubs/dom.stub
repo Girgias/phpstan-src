@@ -29,7 +29,8 @@ class DOMDocument
 
 class DOMNode
 {
-
+	/** @var DOMNamedNodeMap<DOMAttr>|null */
+	public readonly ?DOMNamedNodeMap $attributes;
 }
 
 class DOMElement extends DOMNode
@@ -141,9 +142,12 @@ class DOMProcessingInstruction
 }
 
 /**
+ * @template-covariant TNode as DOMNode
+ * @implements Traversable<string, TNode>
+ * @implements IteratorAggregate<int, TNode>
  * @property-read int $length
  */
-class DOMNamedNodeMap
+class DOMNamedNodeMap implements Traversable, IteratorAggregate, Countable
 {
 
 }
