@@ -1,6 +1,6 @@
 <?php
 
-class DOMDocument
+class DOMDocument extends DOMNode
 {
 
 	/** @var DOMDocumentType|null */
@@ -83,7 +83,7 @@ class DOMXPath
 
 }
 
-class DOMAttr
+class DOMAttr extends DOMNode
 {
 
 	/** @var DOMDocument */
@@ -91,7 +91,7 @@ class DOMAttr
 
 }
 
-class DOMCharacterData
+class DOMCharacterData extends DOMNode
 {
 
 	/** @var DOMDocument */
@@ -99,7 +99,7 @@ class DOMCharacterData
 
 }
 
-class DOMDocumentType
+class DOMDocumentType extends DOMNode
 {
 
 	/** @var DOMDocument */
@@ -107,7 +107,7 @@ class DOMDocumentType
 
 }
 
-class DOMEntity
+class DOMEntity extends DOMNode
 {
 
 	/** @var DOMDocument */
@@ -115,7 +115,7 @@ class DOMEntity
 
 }
 
-class DOMNotation
+class DOMNotation extends DOMNode
 {
 
 	/** @var DOMDocument */
@@ -123,7 +123,7 @@ class DOMNotation
 
 }
 
-class DOMProcessingInstruction
+class DOMProcessingInstruction extends DOMNode
 {
 
 	/** @var DOMDocument */
@@ -152,7 +152,7 @@ class DOMNamedNodeMap implements Traversable, IteratorAggregate, Countable
 
 }
 
-class DOMText
+class DOMText extends DOMCharacterData
 {
 
 	/** @var string */
