@@ -957,4 +957,12 @@ class AccessPropertiesRuleTest extends RuleTestCase
 		$this->analyse([__DIR__ . '/data/trait-mixin.php'], []);
 	}
 
+	public function testDomExtensionLegacyTemplateNodes(): void
+	{
+		$this->checkThisOnly = false;
+		$this->checkUnionTypes = true;
+		$this->checkDynamicProperties = true;
+		$this->analyse([__DIR__ . '/data/dom-legacy-ext-template-nodes.php'], []);
+	}
+
 }
