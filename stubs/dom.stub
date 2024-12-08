@@ -31,7 +31,7 @@ class DOMNode
 {
 	/**
 	 * @readonly
-	 * @var DOMNamedNodeMap<DOMAttr<string>>|null
+	 * @var DOMNamedNodeMap<DOMAttr>|null
 	 */
 	public $attributes;
 
@@ -44,13 +44,6 @@ class DOMElement extends DOMNode
 
 	/** @var DOMDocument */
 	public $ownerDocument;
-
-	/**
-	 * @readonly
-	 * @inherited
-	 * @var DOMNamedNodeMap<DOMAttr<string>>|null
-	 */
-	public $attributes;
 
 	/**
 	 * @param string $name
@@ -66,22 +59,12 @@ class DOMElement extends DOMNode
 	public function getElementsByTagNameNS ($namespaceURI, $localName) {}
 
    /**
-    * @template T of string
-    * @param T $qualifiedName
-    * @return bool
-    * @phpstan-assert-if-true (T is 'xml:id' ? DOMNameSpaceNode : DOMAttr<T>) $this->hasAttribute($qualifiedName)
-    * @phpstan-assert-if-true DOMNameSpaceNode<DOMAttr<T>|DOMAttr<string>> $this->$attributes
+    * @phpstan-assert-if-true DOMNameSpaceNode|DOMAttr $this->hasAttribute($qualifiedName)
+    * @phpstan-assert-if-true DOMNamedNodeMap<DOMAttr> $this->attributes
     */
 	public function hasAttribute(string $qualifiedName): bool
 
-	public function hasAttributeNS(?string $namespace, string $localName): bool
-
-   /**
-    * @template T of string
-    * @param T $qualifiedName
-    * @return (T is 'xml:id' ? DOMNameSpaceNode|false : DOMAttr|false)
-    */
-	public function getAttributeNode(string $qualifiedName): DOMAttr<T>|DOMNameSpaceNode|false
+	public function getAttributeNode(string $qualifiedName): DOMAttr|DOMNameSpaceNode|false
 }
 
 /**
@@ -113,19 +96,10 @@ class DOMXPath
 
 }
 
-/**
- * @template Name as string
- */
 class DOMAttr extends DOMNode
 {
 	/** @var DOMDocument */
 	public $ownerDocument;
-
-	/**
-	 * @var Name
-	 * @readonly
-	 */
-	public $name;
 
 }
 
