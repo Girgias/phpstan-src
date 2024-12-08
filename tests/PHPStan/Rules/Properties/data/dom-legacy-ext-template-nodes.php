@@ -2,11 +2,11 @@
 
 use function PHPStan\Testing\assertType;
 
-function (\DOMNode $node): void {
+function basic_node(\DOMNode $node): void {
 	assertType(DOMNamedNodeMap::class . '<' . DOMAttr::class . '>', $node->attributes);
 };
 
-function parse(\DOMElement $node): void
+function element_node(\DOMElement $node): void
 {
 	assertType(DOMNamedNodeMap::class . '<' . DOMAttr::class . '>', $node->attributes);
 	$attribute = $node->attributes->getNamedItem('class');

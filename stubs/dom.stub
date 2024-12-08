@@ -29,8 +29,11 @@ class DOMDocument extends DOMNode
 
 class DOMNode
 {
-	/** @var DOMNamedNodeMap<DOMAttr>|null */
-	public readonly ?DOMNamedNodeMap $attributes;
+	/**
+	 * @readonly
+	 * @var DOMNamedNodeMap<DOMAttr>|null
+	 */
+	public $attributes;
 }
 
 class DOMElement extends DOMNode
@@ -150,6 +153,24 @@ class DOMProcessingInstruction extends DOMNode
 class DOMNamedNodeMap implements Traversable, IteratorAggregate, Countable
 {
 
+    /**
+     * @return (TNode | null)
+     */
+    public function getNamedItem(string $qualifiedName)
+    {
+    }
+    /**
+     * @return (TNode | null)
+     */
+    public function getNamedItemNS(?string $namespace, string $localName)
+    {
+    }
+    /**
+     * @return (TNode | null)
+     */
+    public function item(int $index)
+    {
+    }
 }
 
 class DOMText extends DOMCharacterData
