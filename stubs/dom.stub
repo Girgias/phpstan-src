@@ -37,7 +37,6 @@ class DOMNode
 
 	/**
 	 * @phpstan-assert-if-true DOMNamedNodeMap<DOMAttr> $this->attributes
-	 * @phpstan-assert-if-false null $this->attributes
 	 */
 	public function hasAttributes(): bool {}
 }
@@ -47,6 +46,12 @@ class DOMElement extends DOMNode
 
 	/** @var DOMDocument */
 	public $ownerDocument;
+
+	/**
+	 * @readonly
+	 * @var DOMNamedNodeMap<DOMAttr>|null
+	 */
+	public $attributes;
 
 	/**
 	 * @param string $name
@@ -64,11 +69,12 @@ class DOMElement extends DOMNode
 	/**
 	 * @template-covariant T of string
 	 * @param T $qualifiedName
-	 * @phpstan-assert-if-true DOMAttr|DOMNameSpaceNode $this->getAttributeNode($qualifiedName)
+	 * @phpstan-assert-if-true =DOMAttr $this->getAttributeNode($qualifiedName)
+	 * @phpstan-assert-if-true =DOMNamedNodeMap<DOMAttr> $this->attributes
 	 */
 	public function hasAttribute(string $qualifiedName): bool {}
 
-	public function getAttributeNode(string $qualifiedName): DOMAttr|DOMNameSpaceNode|false {}
+	public function getAttributeNode(string $qualifiedName): DOMAttr|false {}
 }
 
 /**

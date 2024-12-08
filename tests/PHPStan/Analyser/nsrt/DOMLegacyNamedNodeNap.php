@@ -22,6 +22,7 @@ class Foo
 
 	public function element_node(DOMElement $element): void
 	{
+		assertType('DOMNamedNodeMap<DOMAttr>|null', $element->attributes);
 		if ($element->hasAttribute('class')) {
 			assertType('DOMNamedNodeMap<DOMAttr>', $element->attributes);
 			$attribute = $element->getAttributeNode('class');
@@ -34,6 +35,7 @@ class Foo
 
 	public function element_node_attribute_fetch_via_attributes_property(DOMElement $element): void
 	{
+		assertType('DOMNamedNodeMap<DOMAttr>|null', $element->attributes);
 		if ($element->hasAttribute('class')) {
 			assertType('DOMNamedNodeMap<DOMAttr>', $element->attributes);
 			$attribute = $element->attributes->getNamedItem('class');
