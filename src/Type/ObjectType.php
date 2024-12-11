@@ -61,7 +61,16 @@ class ObjectType implements TypeWithClassName, SubtractableType
 	use UndecidedComparisonTypeTrait;
 	use NonGeneralizableTypeTrait;
 
-	private const EXTRA_OFFSET_CLASSES = ['SimpleXMLElement', 'DOMNodeList', 'Threaded'];
+	private const EXTRA_OFFSET_CLASSES = [
+		'DOMNamedNodeMap',
+		'Dom\NamedNodeMap',
+		'DOMNodeList',
+		'Dom\NodeList',
+		'Dom\HTMLCollection',
+		'Dom\DtdNamedNodeMap',
+		'SimpleXMLElement',
+		'Threaded',
+	];
 
 	private ?Type $subtractedType;
 
@@ -1067,19 +1076,26 @@ class ObjectType implements TypeWithClassName, SubtractableType
 			: new BooleanType();
 	}
 
-	private function isExtraOffsetAccessibleClass(): TrinaryLogic
+	private function isExtraOffsetAccessibleClass(AccessOffsetMode $mode): TrinaryLogic
 	{
 		$classReflection = $this->getClassReflection();
 		if ($classReflection === null) {
 			return TrinaryLogic::createMaybe();
 		}
 
+		// TODO Narrow down NodeList/Map types
 		foreach (self::EXTRA_OFFSET_CLASSES as $extraOffsetClass) {
-			if ($classReflection->getName() === $extraOffsetClass) {
-				return TrinaryLogic::createYes();
-			}
-			if ($classReflection->isSubclassOf($extraOffsetClass)) {
-				return TrinaryLogic::createYes();
+			if (
+				$classReflection->getName() === $extraOffsetClass
+				|| $classReflection->isSubclassOf($extraOffsetClass)
+			) {
+				return match ($extraOffsetClass) {
+					'DOMNamedNodeMap', 'Dom\NamedNodeMap', 'DOMNodeList', 'Dom\NodeList', 'Dom\HTMLCollection', 'Dom\DtdNamedNodeMap' => match ($mode) {
+						AccessOffsetMode::Read, AccessOffsetMode::Exist => TrinaryLogic::createYes(),
+						default => TrinaryLogic::createNo(),
+					},
+					default => TrinaryLogic::createYes(),
+				};
 			}
 		}
 
@@ -1097,14 +1113,16 @@ class ObjectType implements TypeWithClassName, SubtractableType
 	public function isOffsetAccessible(): TrinaryLogic
 	{
 		return $this->isInstanceOf(ArrayAccess::class)->or(
-			$this->isExtraOffsetAccessibleClass(),
+			// TODO Back propagate this?
+			$this->isExtraOffsetAccessibleClass(AccessOffsetMode::Read),
 		);
 	}
 
 	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
-		// TODO Narrow down NodeList/Map types
-		return $this->isOffsetAccessible();
+		return $this->isInstanceOf(ArrayAccess::class)->or(
+			$this->isExtraOffsetAccessibleClass($mode),
+		);
 	}
 
 	public function hasOffsetValueType(Type $offsetType): TrinaryLogic
