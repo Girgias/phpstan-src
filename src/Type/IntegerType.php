@@ -97,7 +97,7 @@ class IntegerType implements Type
 		return $this;
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createYes();
 	}

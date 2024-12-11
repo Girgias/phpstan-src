@@ -171,7 +171,7 @@ class NullType implements ConstantScalarType
 		return TrinaryLogic::createYes();
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createYes();
 	}

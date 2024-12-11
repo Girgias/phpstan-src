@@ -101,8 +101,9 @@ class BooleanType implements Type
 		return new UnionType([new ConstantIntegerType(0), new ConstantIntegerType(1)]);
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
+		// TODO Should this be NO?
 		return TrinaryLogic::createYes();
 	}
 

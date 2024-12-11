@@ -12,6 +12,7 @@ use PHPStan\Reflection\Type\CallbackUnresolvedMethodPrototypeReflection;
 use PHPStan\Reflection\Type\UnresolvedMethodPrototypeReflection;
 use PHPStan\TrinaryLogic;
 use PHPStan\Type\AcceptsResult;
+use PHPStan\Type\AccessOffsetMode;
 use PHPStan\Type\CompoundType;
 use PHPStan\Type\ErrorType;
 use PHPStan\Type\IntersectionType;
@@ -111,7 +112,7 @@ class HasMethodType implements AccessoryType, CompoundType
 		return sprintf('hasMethod(%s)', $this->methodName);
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createMaybe();
 	}

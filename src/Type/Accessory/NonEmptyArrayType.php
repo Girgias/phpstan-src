@@ -7,6 +7,7 @@ use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\TrinaryLogic;
 use PHPStan\Type\AcceptsResult;
+use PHPStan\Type\AccessOffsetMode;
 use PHPStan\Type\BooleanType;
 use PHPStan\Type\CompoundType;
 use PHPStan\Type\Constant\ConstantFloatType;
@@ -128,7 +129,7 @@ class NonEmptyArrayType implements CompoundType, AccessoryType
 		return TrinaryLogic::createYes();
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createYes();
 	}

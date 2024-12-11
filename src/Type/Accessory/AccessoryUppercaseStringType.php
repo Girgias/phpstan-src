@@ -7,6 +7,7 @@ use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\TrinaryLogic;
 use PHPStan\Type\AcceptsResult;
+use PHPStan\Type\AccessOffsetMode;
 use PHPStan\Type\BenevolentUnionType;
 use PHPStan\Type\BooleanType;
 use PHPStan\Type\CompoundType;
@@ -26,6 +27,7 @@ use PHPStan\Type\Traits\NonGenericTypeTrait;
 use PHPStan\Type\Traits\NonIterableTypeTrait;
 use PHPStan\Type\Traits\NonObjectTypeTrait;
 use PHPStan\Type\Traits\NonRemoveableTypeTrait;
+use PHPStan\Type\Traits\StringTypeTrait;
 use PHPStan\Type\Traits\UndecidedComparisonCompoundTypeTrait;
 use PHPStan\Type\Type;
 use PHPStan\Type\UnionType;
@@ -41,6 +43,7 @@ class AccessoryUppercaseStringType implements CompoundType, AccessoryType
 	use UndecidedComparisonCompoundTypeTrait;
 	use NonGenericTypeTrait;
 	use NonRemoveableTypeTrait;
+	use StringTypeTrait;
 
 	/** @api */
 	public function __construct()
@@ -115,11 +118,6 @@ class AccessoryUppercaseStringType implements CompoundType, AccessoryType
 	}
 
 	public function isOffsetAccessible(): TrinaryLogic
-	{
-		return TrinaryLogic::createYes();
-	}
-
-	public function isOffsetAccessLegal(): TrinaryLogic
 	{
 		return TrinaryLogic::createYes();
 	}

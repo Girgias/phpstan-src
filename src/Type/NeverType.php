@@ -243,7 +243,7 @@ class NeverType implements CompoundType
 		return TrinaryLogic::createYes();
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createYes();
 	}

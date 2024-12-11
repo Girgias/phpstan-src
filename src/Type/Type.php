@@ -129,7 +129,7 @@ interface Type
 
 	public function isOffsetAccessible(): TrinaryLogic;
 
-	public function isOffsetAccessLegal(): TrinaryLogic;
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic;
 
 	public function hasOffsetValueType(Type $offsetType): TrinaryLogic;
 

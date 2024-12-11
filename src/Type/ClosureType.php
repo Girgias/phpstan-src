@@ -269,7 +269,7 @@ class ClosureType implements TypeWithClassName, CallableParametersAcceptor
 		);
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createNo();
 	}

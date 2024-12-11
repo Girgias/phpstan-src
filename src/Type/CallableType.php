@@ -321,7 +321,7 @@ class CallableType implements CompoundType, CallableParametersAcceptor
 		return new ErrorType();
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createMaybe();
 	}

@@ -18,6 +18,7 @@ use PHPStan\Type\Traits\NonGeneralizableTypeTrait;
 use PHPStan\Type\Traits\NonGenericTypeTrait;
 use PHPStan\Type\Traits\NonIterableTypeTrait;
 use PHPStan\Type\Traits\NonObjectTypeTrait;
+use PHPStan\Type\Traits\StringTypeTrait;
 use PHPStan\Type\Traits\UndecidedBooleanTypeTrait;
 use PHPStan\Type\Traits\UndecidedComparisonTypeTrait;
 use function count;
@@ -35,6 +36,7 @@ class StringType implements Type
 	use UndecidedComparisonTypeTrait;
 	use NonGenericTypeTrait;
 	use NonGeneralizableTypeTrait;
+	use StringTypeTrait;
 
 	/** @api */
 	public function __construct()
@@ -52,11 +54,6 @@ class StringType implements Type
 	}
 
 	public function isOffsetAccessible(): TrinaryLogic
-	{
-		return TrinaryLogic::createYes();
-	}
-
-	public function isOffsetAccessLegal(): TrinaryLogic
 	{
 		return TrinaryLogic::createYes();
 	}

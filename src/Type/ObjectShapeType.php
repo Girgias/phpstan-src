@@ -420,7 +420,7 @@ class ObjectShapeType implements Type
 		);
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createMaybe();
 	}

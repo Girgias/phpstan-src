@@ -310,7 +310,7 @@ class StrictMixedType implements CompoundType
 		return TrinaryLogic::createNo();
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createNo();
 	}

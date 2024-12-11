@@ -1101,8 +1101,9 @@ class ObjectType implements TypeWithClassName, SubtractableType
 		);
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
+		// TODO Narrow down NodeList/Map types
 		return $this->isOffsetAccessible();
 	}
 

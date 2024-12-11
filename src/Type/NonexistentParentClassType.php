@@ -157,7 +157,7 @@ class NonexistentParentClassType implements Type
 		return new ErrorType();
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createNo();
 	}

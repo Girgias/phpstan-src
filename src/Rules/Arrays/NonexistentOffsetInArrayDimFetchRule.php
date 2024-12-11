@@ -9,6 +9,7 @@ use PHPStan\Internal\SprintfHelper;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Rules\RuleLevelHelper;
+use PHPStan\Type\AccessOffsetMode;
 use PHPStan\Type\ErrorType;
 use PHPStan\Type\Type;
 use PHPStan\Type\VerbosityLevel;
@@ -62,10 +63,20 @@ final class NonexistentOffsetInArrayDimFetchRule implements Rule
 		$isOffsetAccessible = $isOffsetAccessibleType->isOffsetAccessible();
 
 		if ($scope->isInExpressionAssign($node) && $isOffsetAccessible->yes()) {
-			return [];
+			if ($isOffsetAccessibleType->isOffsetAccessLegal(AccessOffsetMode::Write)->yes()) {
+				return [];
+			} else {
+				// TODO Improve
+				return [
+					RuleErrorBuilder::message(sprintf(
+						'Cannot access an offset on %s.',
+						$isOffsetAccessibleType->describe(VerbosityLevel::typeOnly()),
+					))->identifier('offsetAccess.nonOffsetAccessible')->build(),
+				];
+			}
 		}
 
-		if ($scope->isUndefinedExpressionAllowed($node) && $isOffsetAccessibleType->isOffsetAccessLegal()->yes()) {
+		if ($scope->isUndefinedExpressionAllowed($node) && $isOffsetAccessibleType->isOffsetAccessLegal(AccessOffsetMode::Read)->yes()) {
 			return [];
 		}
 

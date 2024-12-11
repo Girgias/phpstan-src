@@ -11,6 +11,7 @@ use PHPStan\Reflection\Type\UnresolvedMethodPrototypeReflection;
 use PHPStan\Reflection\Type\UnresolvedPropertyPrototypeReflection;
 use PHPStan\TrinaryLogic;
 use PHPStan\Type\AcceptsResult;
+use PHPStan\Type\AccessOffsetMode;
 use PHPStan\Type\BooleanType;
 use PHPStan\Type\CompoundType;
 use PHPStan\Type\Generic\TemplateTypeMap;
@@ -218,9 +219,9 @@ trait LateResolvableTypeTrait
 		return $this->resolve()->isOffsetAccessible();
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
-		return $this->resolve()->isOffsetAccessLegal();
+		return $this->resolve()->isOffsetAccessLegal($mode);
 	}
 
 	public function hasOffsetValueType(Type $offsetType): TrinaryLogic

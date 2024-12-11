@@ -3,6 +3,7 @@
 namespace PHPStan\Type\Traits;
 
 use PHPStan\TrinaryLogic;
+use PHPStan\Type\AccessOffsetMode;
 use PHPStan\Type\Accessory\AccessoryArrayListType;
 use PHPStan\Type\Accessory\NonEmptyArrayType;
 use PHPStan\Type\ArrayType;
@@ -34,7 +35,7 @@ trait ArrayTypeTrait
 		return TrinaryLogic::createYes();
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createYes();
 	}

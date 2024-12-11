@@ -366,9 +366,9 @@ class StaticType implements TypeWithClassName, SubtractableType
 		return $this->getStaticObjectType()->isOffsetAccessible();
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
-		return $this->getStaticObjectType()->isOffsetAccessLegal();
+		return $this->getStaticObjectType()->isOffsetAccessLegal($mode);
 	}
 
 	public function hasOffsetValueType(Type $offsetType): TrinaryLogic

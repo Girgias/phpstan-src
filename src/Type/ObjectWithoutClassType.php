@@ -134,7 +134,7 @@ class ObjectWithoutClassType implements SubtractableType
 		);
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
 		return TrinaryLogic::createMaybe();
 	}

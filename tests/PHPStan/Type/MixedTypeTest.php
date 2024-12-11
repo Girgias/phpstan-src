@@ -1097,7 +1097,8 @@ class MixedTypeTest extends PHPStanTestCase
 	public function testSubstractedIsOffsetLegal(MixedType $mixedType, Type $typeToSubtract, TrinaryLogic $expectedResult): void
 	{
 		$subtracted = $mixedType->subtract($typeToSubtract);
-		$actualResult = $subtracted->isOffsetAccessLegal();
+		// TODO Propagate Access Mode?
+		$actualResult = $subtracted->isOffsetAccessLegal(AccessOffsetMode::Read);
 
 		$this->assertSame(
 			$expectedResult->describe(),

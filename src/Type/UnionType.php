@@ -684,9 +684,9 @@ class UnionType implements CompoundType
 		return $this->unionResults(static fn (Type $type): TrinaryLogic => $type->isOffsetAccessible());
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
-		return $this->unionResults(static fn (Type $type): TrinaryLogic => $type->isOffsetAccessLegal());
+		return $this->unionResults(static fn (Type $type): TrinaryLogic => $type->isOffsetAccessLegal($mode));
 	}
 
 	public function hasOffsetValueType(Type $offsetType): TrinaryLogic

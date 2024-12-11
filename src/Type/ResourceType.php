@@ -91,8 +91,9 @@ class ResourceType implements Type
 		return new ErrorType();
 	}
 
-	public function isOffsetAccessLegal(): TrinaryLogic
+	public function isOffsetAccessLegal(AccessOffsetMode $mode): TrinaryLogic
 	{
+		// TODO Should be NO?
 		return TrinaryLogic::createYes();
 	}
 
