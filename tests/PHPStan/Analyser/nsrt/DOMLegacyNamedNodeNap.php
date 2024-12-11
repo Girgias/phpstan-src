@@ -22,30 +22,27 @@ class Foo
 
 	public function element_node(DOMElement $element): void
 	{
-		assertType('DOMNamedNodeMap<DOMAttr>|null', $element->attributes);
+		assertType('DOMNamedNodeMap<DOMAttr>', $element->attributes);
 		if ($element->hasAttribute('class')) {
-			assertType('DOMNamedNodeMap<DOMAttr>', $element->attributes);
 			$attribute = $element->getAttributeNode('class');
 			assertType(DOMAttr::class, $attribute);
 			assertType('string', $attribute->value);
 		} else {
-			assertType('DOMNamedNodeMap<DOMAttr>|null', $element->attributes);
+			$attribute = $element->getAttributeNode('class');
+			assertType('false', $attribute);
 		}
 	}
 
 	public function element_node_attribute_fetch_via_attributes_property(DOMElement $element): void
 	{
-		assertType('DOMNamedNodeMap<DOMAttr>|null', $element->attributes);
+		assertType('DOMNamedNodeMap<DOMAttr>', $element->attributes);
 		if ($element->hasAttribute('class')) {
-			assertType('DOMNamedNodeMap<DOMAttr>', $element->attributes);
 			$attribute = $element->attributes->getNamedItem('class');
 			if ($attribute === null) {
 				return;
 			}
 			assertType(DOMAttr::class, $attribute);
 			assertType('string', $attribute->value);
-		} else {
-			assertType('DOMNamedNodeMap<DOMAttr>|null', $element->attributes);
 		}
 	}
 }

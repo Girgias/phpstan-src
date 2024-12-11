@@ -49,7 +49,7 @@ class DOMElement extends DOMNode
 
 	/**
 	 * @readonly
-	 * @var DOMNamedNodeMap<DOMAttr>|null
+	 * @var DOMNamedNodeMap<DOMAttr>
 	 */
 	public $attributes;
 
@@ -67,9 +67,14 @@ class DOMElement extends DOMNode
 	public function getElementsByTagNameNS ($namespaceURI, $localName) {}
 
 	/**
-	 * @phpstan-assert-if-true =DOMNamedNodeMap<DOMAttr> $this->attributes
+	 * @phpstan-assert-if-true non-empty-string $this->getAttribute($qualifiedName)
+	 * @phpstan-assert-if-true DOMAttr|DOMNameSpaceNode $this->getAttributeNode($qualifiedName)
 	 */
 	public function hasAttribute(string $qualifiedName): bool {}
+
+	public function getAttribute(string $qualifiedName): string {}
+
+	public function getAttributeNode(string $qualifiedName): DOMAttr|DOMNameSpaceNode|false {}
 }
 
 /**

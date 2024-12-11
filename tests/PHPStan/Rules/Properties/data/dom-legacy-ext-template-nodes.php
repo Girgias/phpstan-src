@@ -22,3 +22,12 @@ function element_node_attribute_fetch_via_attributes_property(\DOMElement $eleme
 	}
 	echo $attribute->value;
 }
+
+function element_node_attribute_fetch_via_getAttributeNode(\DOMElement $element): void
+{
+	$attribute = $element->getAttributeNode('class');
+	if ($attribute === null) {
+		return;
+	}
+	echo $attribute->value;
+}
